@@ -2,6 +2,8 @@
 
 Website hướng dẫn tiếng Việt cho người dùng ít quen công nghệ, đi theo chu trình 10 bước trong `workflows/USER_GUIDE_FLOW.md`. Nội dung dùng chung cho mọi doanh nghiệp, không đọc dữ liệu hội thoại hay cấu hình trong repository.
 
+Bản đang chạy: https://zalo-crm-agent.vercel.app (Vercel project `zalo-crm-agent`, Root Directory `web-docs`).
+
 ## Chạy local
 
 Yêu cầu Node.js >= 20.9 và npm. Chạy trong thư mục `web-docs`:

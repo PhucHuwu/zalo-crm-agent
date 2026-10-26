@@ -24,7 +24,7 @@ Brief việc hôm nay cho từng sale · Chiến dịch bán hàng/chăm sóc ·
 
 Cần sẵn: Python 3.9+ (chỉ dùng thư viện chuẩn), quyền quản trị Zalo OA để tạo ứng dụng và cấp quyền, API key TinaCRM.
 
-Website hướng dẫn từng bước (Next.js, tiếng Việt) nằm tại [`web-docs/`](web-docs/README.md): 10 bước có hình, câu lệnh sao chép, checklist, tìm kiếm. Xem README trong thư mục đó để chạy local.
+Website hướng dẫn từng bước: **https://zalo-crm-agent.vercel.app** (mã nguồn Next.js tại [`web-docs/`](web-docs/README.md)): 10 bước có hình, câu lệnh sao chép, checklist, tìm kiếm. Xem README trong thư mục đó để chạy local.
 
 ## Câu lệnh thường dùng (nói với Claude)
 
