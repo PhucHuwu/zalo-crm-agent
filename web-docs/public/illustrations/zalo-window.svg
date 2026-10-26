@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500">
+<rect width="1100" height="500" rx="18" fill="#f2f5ef"/>
+<g font-family="Arial, sans-serif" fill="#24342d">
+<text x="45" y="55" font-size="25" font-weight="700">Khung nhắn tự do của Zalo</text>
+<text x="45" y="88" font-size="17" fill="#53655a">Sơ đồ minh họa • Tính từ tin nhắn cuối của khách</text>
+<path d="M60 220H1040" stroke="#758c7b" stroke-width="3"/>
+<circle cx="80" cy="220" r="10" fill="#24644e"/>
+<text x="45" y="190" font-size="17" font-weight="700">Khách nhắn</text>
+<rect x="80" y="240" width="520" height="70" rx="10" fill="#24644e"/>
+<text x="102" y="282" font-size="19" font-weight="700" fill="#fff">Trong 48 giờ: gửi tin qua ứng dụng của sale</text>
+<rect x="600" y="240" width="440" height="70" rx="10" fill="#fff6e5" stroke="#e0c48a"/>
+<text x="622" y="282" font-size="19" font-weight="700">Sau 48 giờ: tạo task cho sale</text>
+<text x="590" y="205" font-size="16" fill="#53655a">48 giờ</text><path d="M600 210V230" stroke="#53655a" stroke-width="2"/>
+<rect x="45" y="350" width="1010" height="110" rx="12" fill="#fff" stroke="#b8cabd"/>
+<text x="68" y="388" font-size="18">Trong khung: Claude soạn tin, bạn duyệt, gửi bằng đúng ứng dụng của sale phụ trách khách.</text>
+<text x="68" y="422" font-size="18">Ngoài khung: Claude tạo task trên TinaCRM để sale gọi hoặc nhắn trực tiếp.</text>
+<text x="68" y="448" font-size="15" fill="#53655a">Số giờ có thể đổi theo chính sách Zalo; workflow đọc từ cấu hình zalo.free_message_window_hours.</text>
+</g></svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="600" viewBox="0 0 1100 600">
+<rect width="1100" height="600" rx="18" fill="#f2f5ef"/>
+<g font-family="Arial, sans-serif" fill="#24342d">
+<text x="45" y="55" font-size="25" font-weight="700">Đặt tài liệu vào đúng thư mục</text>
+<text x="45" y="88" font-size="17" fill="#53655a">Sơ đồ minh họa • Mở thư mục theo thứ tự từ trái sang phải</text>
+<rect x="45" y="230" width="225" height="105" rx="12" fill="#24644e"/>
+<text x="67" y="270" font-size="20" font-weight="700" fill="#fff">zalo-crm-agent</text><text x="67" y="300" font-size="17" fill="#e7f1e8">Thư mục đã giải nén</text>
+<path d="M270 283H320V199H370 M320 283V425H370" fill="none" stroke="#758c7b" stroke-width="3"/>
+<rect x="370" y="150" width="170" height="100" rx="12" fill="#fff" stroke="#b8cabd"/>
+<text x="392" y="191" font-size="23" font-weight="700">inputs</text><text x="392" y="220" font-size="16">Bạn đặt tài liệu</text>
+<path d="M540 199H590V159H635 M590 199V309H635" fill="none" stroke="#758c7b" stroke-width="3"/>
+<rect x="635" y="119" width="415" height="110" rx="12" fill="#fff" stroke="#b8cabd"/>
+<text x="658" y="154" font-size="21" font-weight="700">01_company_info</text><text x="658" y="185" font-size="18">Hồ sơ công ty, khách hàng tiêu biểu</text><text x="658" y="210" font-size="15" fill="#53655a">Ví dụ: ho-so-cong-ty.pdf</text>
+<rect x="635" y="269" width="415" height="110" rx="12" fill="#fff" stroke="#b8cabd"/>
+<text x="658" y="304" font-size="21" font-weight="700">02_marketing_materials</text><text x="658" y="335" font-size="18">Sản phẩm, bảng giá, chính sách bán</text><text x="658" y="360" font-size="15" fill="#53655a">Ví dụ: bang-gia-2026.xlsx</text>
+<rect x="370" y="400" width="170" height="100" rx="12" fill="#e6eddf" stroke="#b8cabd"/>
+<text x="392" y="441" font-size="23" font-weight="700">outputs</text><text x="392" y="470" font-size="16">Bạn xem kết quả</text>
+<path d="M540 450H635" fill="none" stroke="#758c7b" stroke-width="3"/>
+<rect x="635" y="410" width="415" height="105" rx="12" fill="#e6eddf" stroke="#b8cabd"/>
+<text x="658" y="446" font-size="19" font-weight="700">Phân tích • Đồng bộ CRM • Brief sale</text><text x="658" y="478" font-size="18">Báo cáo tuần</text>
+<text x="45" y="565" font-size="18" fill="#53655a">Nhớ đơn giản: công ty là ai → 01_company_info  /  công ty bán gì, giá bao nhiêu → 02_marketing_materials</text>
+</g></svg>
