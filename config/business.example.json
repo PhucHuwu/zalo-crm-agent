@@ -1,0 +1,53 @@
+{
+  "business_id": null,
+  "business_name": null,
+  "website": null,
+  "zalo": {
+    "free_message_window_hours": 48,
+    "send_mode": "draft_only",
+    "daily_send_limit_per_app": null
+  },
+  "crm": {
+    "provider": "tinacrm",
+    "base_url": null,
+    "connection_method": "rest_api",
+    "auth_method": "api_key",
+    "credential_reference": "config/tinacrm_api_key.txt",
+    "field_mapping": {
+      "zalo_user_id": null,
+      "zalo_oa_id": null,
+      "owner_sale": null,
+      "segment": null
+    },
+    "stage_mapping": {
+      "new": null,
+      "qualified": null,
+      "proposal": null,
+      "negotiation": null,
+      "won": null,
+      "lost": null
+    }
+  },
+  "sync": {
+    "min_confidence": 0.6,
+    "tz_offset": "+07:00",
+    "auto_sync": false
+  },
+  "analysis": {
+    "segments": [],
+    "products": []
+  },
+  "schedule": {
+    "timezone": null,
+    "daily_run_time": null,
+    "days": null,
+    "task_name": null,
+    "execution_method": null
+  },
+  "reporting": {
+    "recipients": [],
+    "day_of_week": null,
+    "time": null,
+    "task_name": null
+  }
+}

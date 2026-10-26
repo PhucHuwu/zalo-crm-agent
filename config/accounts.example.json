@@ -1,0 +1,42 @@
+{
+  "_comment": "Sao chép thành config/accounts.json. Không ghi Secret Key/token ở đây: chúng nằm trong config/secrets/zalo/<app_id>.json do scripts/zalo_save_app tạo. sale_tag = tên nhãn Zalo đánh dấu khách của sale (gắn trong OA Manager hoặc scripts/zalo_assign.py). reader_app_id = ứng dụng dùng để đọc hội thoại của OA (mọi ứng dụng cùng OA đều đọc được toàn bộ; để trống thì lấy ứng dụng đầu tiên chạy được).",
+  "fetch": {
+    "first_run_hours": 48
+  },
+  "assignment": {
+    "unassigned_policy": "queue",
+    "manager_name": "Lê Quản Lý",
+    "manager_crm_member_id": null
+  },
+  "oa_accounts": [
+    {
+      "oa_id": "1234567890123456789",
+      "oa_name": "Công ty ABC – Tư vấn",
+      "reader_app_id": "1111111111111111111",
+      "applications": [
+        {
+          "app_id": "1111111111111111111",
+          "label": "ABC – Sale Hà Nội 1",
+          "status": "active",
+          "sale_tag": "Sale: Minh",
+          "sale": {
+            "name": "Nguyễn Văn Minh",
+            "email": "minh@abc.vn",
+            "crm_member_id": null
+          }
+        },
+        {
+          "app_id": "2222222222222222222",
+          "label": "ABC – Sale HCM 1",
+          "status": "active",
+          "sale_tag": "Sale: Lan",
+          "sale": {
+            "name": "Trần Thị Lan",
+            "email": "lan@abc.vn",
+            "crm_member_id": null
+          }
+        }
+      ]
+    }
+  ]
+}

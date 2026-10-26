@@ -1,0 +1,30 @@
+{
+  "slug": null,
+  "name": null,
+  "type": "sales",
+  "status": "draft",
+  "goal": null,
+  "priority_products": [],
+  "audience": {
+    "segments": [],
+    "lifecycle_stages": [],
+    "intents": [],
+    "interests_any": [],
+    "tags_any": [],
+    "sales": [],
+    "app_ids": [],
+    "oa_ids": [],
+    "last_message_within_days": null,
+    "last_message_older_than_days": null,
+    "max_size": null
+  },
+  "channel_plan": {
+    "in_window": "zalo_oa_message",
+    "out_of_window": "sale_call_task"
+  },
+  "sequence_steps": [],
+  "tone": null,
+  "approval": "draft_only",
+  "daily_send_limit": null,
+  "crm_campaign_value": null
+}

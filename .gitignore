@@ -1,0 +1,28 @@
+# Credentials and per-business configuration
+.env
+.env.*
+config/.env
+config/.env.*
+config/business.json
+config/accounts.json
+config/workflow_progress.md
+config/secrets/
+config/state/
+config/tinacrm_api_key.txt
+
+# Business documents and generated data (contain customer conversations)
+product-marketing.md
+inputs/**
+!inputs/**/
+!inputs/**/.gitkeep
+outputs/**
+!outputs/**/
+!outputs/**/.gitkeep
+campaigns/
+
+# Local runtime files
+__pycache__/
+*.pyc
+.DS_Store
+.local/
+.venv/
