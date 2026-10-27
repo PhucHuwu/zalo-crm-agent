@@ -27,8 +27,3 @@ __pycache__/
 .local/
 .venv/
 
-# Guide website (web-docs)
-web-docs/node_modules/
-web-docs/.next/
-web-docs/*.tsbuildinfo
-web-docs/out/
