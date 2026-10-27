@@ -14,7 +14,7 @@ campaigns/<slug>/
   outputs/results.md       kết quả chiến dịch
 ```
 
-`slug` viết thường, không dấu, nối gạch ngang (`chot-khach-nong-t11`). Người dùng nói tên bằng lời, Claude tự đặt slug.
+`slug` viết thường, không dấu, nối gạch ngang (`chot-khach-nong-t11`). Người dùng nói tên bằng lời, trợ lý tự đặt slug.
 
 ## Loại chiến dịch gợi ý
 

@@ -25,7 +25,7 @@ python3 scripts/zalo_fetch_daily.py --date <date>
 
 ## 2. Phân tích (agent)
 
-Đọc `outputs/01_daily_extractions/<date>/index.json`, xử lý mọi hội thoại `status = pending_analysis` theo `subagents/01_conversation_analyst.md` và skill `.claude/skills/conversation-analysis/SKILL.md`.
+Đọc `outputs/01_daily_extractions/<date>/index.json`, xử lý mọi hội thoại `status = pending_analysis` theo `subagents/01_conversation_analyst.md` và skill `conversation-analysis` (`.agents/skills/conversation-analysis/SKILL.md`).
 
 - Mỗi hội thoại → một tệp `analysis/<oa_id>_<user_id>.json` đúng schema `rules/data_schemas.md` §2, rồi đổi `status` trong `index.json` thành `analyzed`.
 - Đọc `product-marketing.md` và `config/business.json` → `analysis` một lần đầu phiên để biết sản phẩm, nhóm khách.
@@ -67,7 +67,7 @@ Chưa phân công: <u> khách (cần quản lý chọn sale) | không có.
 Lỗi kết nối: <ứng dụng – việc cần làm> | không có.
 ```
 
-Khi chạy tay và có khách chưa phân công, hỏi tiếp: “1. Giao khách chưa phân công ngay (tôi đề xuất sale cho từng khách). 2. Để sau.” Chọn 1 → `ZALO_OA_CONNECTION.md` mục “Quy trình Claude giao khách hộ”.
+Khi chạy tay và có khách chưa phân công, hỏi tiếp: “1. Giao khách chưa phân công ngay (tôi đề xuất sale cho từng khách). 2. Để sau.” Chọn 1 → `ZALO_OA_CONNECTION.md` mục “Quy trình trợ lý giao khách hộ”.
 
 Cập nhật dòng “Lần chạy hằng ngày gần nhất” trong `config/workflow_progress.md`.
 

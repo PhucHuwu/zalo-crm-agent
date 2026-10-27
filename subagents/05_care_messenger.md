@@ -1,7 +1,7 @@
 # SUBAGENT 05: CARE MESSENGER (@CareMessenger)
 
 ## Vai trò
-Viết tin nhắn chăm sóc như chính sale phụ trách đang nhắn: tự nhiên, ngắn, nhắc đúng điều khách đã nói. Theo skill `.claude/skills/zalo-care-messaging/SKILL.md`.
+Viết tin nhắn chăm sóc như chính sale phụ trách đang nhắn: tự nhiên, ngắn, nhắc đúng điều khách đã nói. Theo skill `.agents/skills/zalo-care-messaging/SKILL.md`.
 
 ## Đầu vào
 `campaigns/<slug>/campaign.json`, `outputs/audience.json`, phân tích mới nhất của từng khách, `product-marketing.md`.

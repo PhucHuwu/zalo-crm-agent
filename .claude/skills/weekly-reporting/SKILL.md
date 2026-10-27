@@ -44,4 +44,4 @@ Lần đầu, hỏi từng câu:
 2. *“Muốn nhận vào lúc nào? Ví dụ: 8:30 sáng thứ Hai.”* → `reporting.day_of_week`, `reporting.time`.
 3. Nếu muốn tự động: tạo lịch theo `workflows/SCHEDULING.md`, lưu `reporting.task_name`.
 
-Chỉ gửi khi đã có công cụ gửi thật (connector email/Slack của Claude Desktop) và người dùng đồng ý; nếu không, lưu tệp và báo đường dẫn.
+Chỉ gửi khi đã có công cụ gửi thật (connector email/Slack của Claude, hoặc plugin Gmail/Slack của ChatGPT/Codex) và người dùng đồng ý; nếu không, lưu tệp và báo đường dẫn.

@@ -9,7 +9,7 @@ applications[].sale_tag on the user (see scripts/zalo_fetch_daily.py). Assigning
   - on TinaCRM (if connected): moves the workflow's open tasks of that customer to the sale
     (ids from config/state/crm_ledger.json) and sets the owner_sale field if mapped.
 
-Usage (used by Claude when the manager asks, e.g. "Giao chị Hoa cho Minh"):
+Usage (used by the assistant when the manager asks, e.g. "Giao chị Hoa cho Minh"):
   python3 scripts/zalo_assign.py unassigned               # customers without (or with conflicting) sale tags
   python3 scripts/zalo_assign.py sales                    # sales that can receive customers
   python3 scripts/zalo_assign.py find "<tên/SĐT/công ty>"  # resolve a customer to its conversation_key

@@ -1,6 +1,6 @@
 # CLAUDE PROJECT INSTRUCTIONS — ZALO OA CRM AGENT
 
-**Môi trường mục tiêu là Claude Code trong tab Code của Claude Desktop, chọn This computer và thư mục workflow này.** `CLAUDE.md` là chỉ dẫn khởi động chính; tệp này chỉ tóm tắt để dùng khi cần dán vào phần hướng dẫn của một Project.
+**Môi trường mục tiêu là trợ lý AI chạy trên máy trong thư mục workflow này: Claude Code (Claude Desktop → Code → This computer) hoặc Codex (ChatGPT desktop app → Codex → Local).** `AGENTS.md` là chỉ dẫn khởi động chính (Claude đọc qua `CLAUDE.md`); tệp này chỉ tóm tắt để dùng khi cần dán vào phần hướng dẫn của một Project hoặc custom instructions.
 
 Bạn là **trợ lý vận hành CRM từ hội thoại Zalo OA**. Mỗi ngày bạn lấy lịch sử hội thoại của các ứng dụng (tài khoản con) thuộc từng Zalo OA, phân tích thành people, companies, opportunities, notes, tasks trên TinaCRM, viết việc cần làm cho từng sale, và dùng dữ liệu đó để chạy chiến dịch bán hàng/chăm sóc khách hàng.
 
@@ -8,7 +8,7 @@ Bạn là **trợ lý vận hành CRM từ hội thoại Zalo OA**. Mỗi ngày 
 
 | # | Bước | Tài liệu | Skill |
 |---|---|---|---|
-| 1 | Khởi động, kiểm tra tiến độ | `workflows/USER_GUIDE_FLOW.md` | |
+| 1 | Mở workflow, cấp quyền, kiểm tra tiến độ | `workflows/ASSISTANT_SETUP.md`, `workflows/USER_GUIDE_FLOW.md` | |
 | 2 | Hiểu doanh nghiệp, sản phẩm, nhóm khách | `workflows/USER_GUIDE_FLOW.md` | `product-marketing` |
 | 3 | Khai báo OA → ứng dụng → sale | `workflows/ZALO_OA_CONNECTION.md` | |
 | 4 | Kết nối Zalo cho từng ứng dụng | `workflows/ZALO_OA_CONNECTION.md` | |

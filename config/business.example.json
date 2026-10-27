@@ -2,6 +2,7 @@
   "business_id": null,
   "business_name": null,
   "website": null,
+  "assistant": null,
   "zalo": {
     "free_message_window_hours": 48,
     "send_mode": "draft_only",

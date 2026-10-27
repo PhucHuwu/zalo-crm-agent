@@ -1,0 +1,34 @@
+# Codex command rules for this workflow. Loaded only after the user trusts this project folder.
+# These scripts call Zalo OA / TinaCRM over the network or open the local key dialogs, which the
+# default sandbox blocks. Allowing exactly these prefixes lets daily and scheduled runs work
+# without opening full access. Sending Zalo messages still requires --confirm and user approval
+# (AGENTS.md, hard rule 3).
+
+prefix_rule(
+    pattern = [["python3", "python", "py"], ["scripts/zalo_fetch_daily.py", "scripts/crm_sync.py", "scripts/tinacrm_rest.py", "scripts/zalo_oa.py", "scripts/zalo_assign.py"]],
+    decision = "allow",
+    justification = "Workflow scripts that read Zalo OA and read/write TinaCRM over the network.",
+    match = [
+        "python3 scripts/zalo_fetch_daily.py --date 2026-10-27",
+        "python3 scripts/crm_sync.py --date 2026-10-27 --dry-run",
+        "python scripts/zalo_oa.py 123 check",
+    ],
+    not_match = [
+        "python3 scripts/other.py",
+        "python3 -c print(1)",
+    ],
+)
+
+prefix_rule(
+    pattern = ["sh", ["scripts/zalo_save_app.sh", "scripts/tinacrm_save_key.sh"]],
+    decision = "allow",
+    justification = "Local dialogs where the user pastes Zalo/TinaCRM keys (macOS).",
+    match = ["sh scripts/zalo_save_app.sh 123", "sh scripts/tinacrm_save_key.sh https://crm.example.com"],
+)
+
+prefix_rule(
+    pattern = [["powershell", "pwsh"], "-NoProfile", "-ExecutionPolicy", "Bypass", "-STA", "-File", ["scripts/zalo_save_app.ps1", "scripts/tinacrm_save_key.ps1"]],
+    decision = "allow",
+    justification = "Local dialogs where the user pastes Zalo/TinaCRM keys (Windows).",
+    match = ["powershell -NoProfile -ExecutionPolicy Bypass -STA -File scripts/zalo_save_app.ps1 123"],
+)

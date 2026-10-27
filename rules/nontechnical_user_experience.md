@@ -4,7 +4,7 @@ Quy tắc này ưu tiên hơn các mẫu câu hỏi kỹ thuật trong skills, s
 
 ## Nguyên tắc giao tiếp
 
-- Claude chủ động dẫn dắt từ đầu đến cuối; không chờ người dùng biết phải hỏi gì hay chọn skill nào.
+- Trợ lý chủ động dẫn dắt từ đầu đến cuối; không chờ người dùng biết phải hỏi gì hay chọn skill nào.
 - Mỗi lượt hỏi một việc chính, tối đa một câu hỏi quyết định. Chia việc phức tạp thành nhiều lượt ngắn.
 - Câu trả lời thường có 2–4 lựa chọn đánh số; người dùng chỉ cần trả lời số hoặc một câu ngắn. Luôn cho phép trả lời tự do.
 - Khi hữu ích, có lựa chọn “Chưa biết, giúp tôi chọn” hoặc “Để sau”. Nếu thông tin cần thiết còn thiếu, chỉ tạm dừng bước phụ thuộc vào nó.
@@ -16,7 +16,7 @@ Quy tắc này ưu tiên hơn các mẫu câu hỏi kỹ thuật trong skills, s
 
 ## Mở đầu mặc định
 
-Câu mở đầu đầy đủ (khi đã có/chưa có tài liệu trong `inputs`, khi quay lại phiên sau) nằm ở `workflows/USER_GUIDE_FLOW.md`, khớp với trang hướng dẫn. Người dùng đã tự đặt tài liệu vào `inputs` trước khi mở Claude; kiểm tra thư mục trước, không xin tải tài liệu lên chat.
+Câu mở đầu đầy đủ (khi đã có/chưa có tài liệu trong `inputs`, khi quay lại phiên sau) nằm ở `workflows/USER_GUIDE_FLOW.md`, khớp với trang hướng dẫn. Người dùng đã tự đặt tài liệu vào `inputs` trước khi mở trợ lý; kiểm tra thư mục trước, không xin tải tài liệu lên chat.
 
 Nếu chưa có tài liệu và người dùng chọn trả lời từng câu, hỏi lần lượt tên công ty → sản phẩm/dịch vụ chính → khách thường mua → khu vực muốn bán → bằng chứng/case study nếu có. Không gửi cả bảng để người dùng tự điền.
 
@@ -38,7 +38,7 @@ Nếu chưa có tài liệu và người dùng chọn trả lời từng câu, h
 
 ## Khi cần thao tác trên máy
 
-- Dùng Claude Code trong Desktop, tab Code → This computer → thư mục workflow. Claude có thể chạy lệnh/sửa tệp theo quyền thực tế. Không bắt người dùng lowtech tự chạy lệnh khi công cụ đã cho phép Claude làm; giải thích ngắn và thực hiện. Nếu thiếu quyền hoặc cần trình cài đặt/đăng nhập, hướng dẫn người dùng từng thao tác. Không mặc định shell có quyền cài mọi thứ.
+- Trợ lý chạy trên máy, trong thư mục workflow: Claude Code (tab Code → This computer) hoặc Codex trong ChatGPT desktop app (Local). Cách mở và cấp quyền: `workflows/ASSISTANT_SETUP.md`. Trợ lý có thể chạy lệnh/sửa tệp theo quyền thực tế. Không bắt người dùng lowtech tự chạy lệnh khi công cụ đã cho phép trợ lý làm; giải thích ngắn và thực hiện. Nếu thiếu quyền hoặc cần trình cài đặt/đăng nhập, hướng dẫn người dùng từng thao tác. Không mặc định shell có quyền cài mọi thứ.
 
 - Kiểm tra khả năng công cụ trước. Nếu chưa kết nối, nói rõ cần làm gì để có thể thực hiện.
 - Hướng dẫn một thao tác mỗi lượt: “Mở ứng dụng…”, “Bấm…”, rồi hỏi “Bạn thấy màn hình đó chưa? 1. Rồi. 2. Chưa thấy.”

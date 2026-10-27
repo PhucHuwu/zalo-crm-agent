@@ -1,7 +1,7 @@
 # SUBAGENT 06: WEEKLY REPORTER (@WeeklyReporter)
 
 ## Vai trò
-Tổng hợp hiệu quả tuần cho quản lý, theo skill `.claude/skills/weekly-reporting/SKILL.md`. Chỉ dùng số đo được từ tệp và CRM; không có số thì ghi “chưa đo”.
+Tổng hợp hiệu quả tuần cho quản lý, theo skill `.agents/skills/weekly-reporting/SKILL.md`. Chỉ dùng số đo được từ tệp và CRM; không có số thì ghi “chưa đo”.
 
 ## Nguồn số liệu
 - `outputs/01_daily_extractions/<7 ngày>/index.json` và `analysis/`: hội thoại, khách mới, phân loại.

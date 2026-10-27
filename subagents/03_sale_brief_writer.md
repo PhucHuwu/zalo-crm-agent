@@ -9,7 +9,7 @@ Các tệp `analysis/*.json` của ngày, `outputs/02_crm_sync/<date>.json`, `co
 ## Đầu ra
 `outputs/03_sale_briefs/<date>/<sale-slug>.md`, chỉ khách thuộc ứng dụng của sale đó (`owner.app_id`).
 
-Thêm một tệp `outputs/03_sale_briefs/<date>/_chua-phan-cong.md` cho người quản lý (`assignment.manager_name`), gồm các khách có `owner = null`. Mỗi khách một dòng: tên, nhu cầu một dòng, chờ từ lúc nào, sale gợi ý (nếu có). Cuối tệp ghi: “Nhắn Claude ‘Giao <tên khách> cho <sale>’ để giao hộ.” (Claude làm theo `workflows/ZALO_OA_CONNECTION.md` mục “Quy trình Claude giao khách hộ”.) Nếu không có khách chưa phân công thì bỏ tệp này.
+Thêm một tệp `outputs/03_sale_briefs/<date>/_chua-phan-cong.md` cho người quản lý (`assignment.manager_name`), gồm các khách có `owner = null`. Mỗi khách một dòng: tên, nhu cầu một dòng, chờ từ lúc nào, sale gợi ý (nếu có). Cuối tệp ghi: “Nhắn trợ lý ‘Giao <tên khách> cho <sale>’ để giao hộ.” (Trợ lý làm theo `workflows/ZALO_OA_CONNECTION.md` mục “Quy trình trợ lý giao khách hộ”.) Nếu không có khách chưa phân công thì bỏ tệp này.
 
 ```markdown
 # Brief <ngày> — <tên sale> (<tên ứng dụng>)

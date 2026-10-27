@@ -15,38 +15,46 @@ TinaCRM: People · Companies · Opportunities · Notes · Tasks (giao đúng sal
 Brief việc hôm nay cho từng sale · Chiến dịch bán hàng/chăm sóc · Báo cáo tuần
 ```
 
-## Cách sử dụng: Claude Code trong Desktop
+## Cách sử dụng: Claude Code hoặc ChatGPT (Codex)
+
+Workflow chạy như nhau trên **Claude Code** (Claude Desktop) và **Codex** (ChatGPT desktop app). Chọn công cụ bạn đang dùng.
 
 1. Tải thư mục workflow về máy (mỗi doanh nghiệp một thư mục riêng). Đặt tài liệu công ty vào `inputs/01_company_info/`, tài liệu sản phẩm/bảng giá vào `inputs/02_marketing_materials/`.
-2. Mở Claude Desktop → **Code** → **This computer** → chọn thư mục gốc có `CLAUDE.md`.
-3. Gửi: “Hãy đọc CLAUDE.md, kiểm tra tài liệu và hướng dẫn tôi thiết lập workflow từng bước.”
-4. Claude hỏi từng câu và dẫn bạn qua 10 bước (`workflows/USER_GUIDE_FLOW.md`). Khóa Zalo và TinaCRM được nhập qua hộp thoại riêng trên máy, không dán vào chat.
+2. Mở thư mục gốc (có `AGENTS.md`) bằng trợ lý trên máy:
+   - **Claude:** Claude Desktop → **Code** → **This computer** → chọn thư mục.
+   - **ChatGPT/Codex:** ChatGPT desktop app → **Codex** → cuộc trò chuyện mới → chạy trên máy (**Local**) → chọn thư mục → chọn **tin cậy** thư mục khi được hỏi.
+3. Gửi: “Hãy đọc AGENTS.md, kiểm tra tài liệu và hướng dẫn tôi thiết lập workflow từng bước.”
+4. Trợ lý hỏi từng câu và dẫn bạn qua 10 bước (`workflows/USER_GUIDE_FLOW.md`). Khóa Zalo và TinaCRM được nhập qua hộp thoại riêng trên máy, không dán vào chat.
+
+Quyền chạy lệnh và chỗ khác nhau giữa hai công cụ: [`workflows/ASSISTANT_SETUP.md`](workflows/ASSISTANT_SETUP.md).
 
 Cần sẵn: Python 3.9+ (chỉ dùng thư viện chuẩn), quyền quản trị Zalo OA để tạo ứng dụng và cấp quyền, API key TinaCRM.
 
 Website hướng dẫn từng bước: **https://zalo-crm-agent.vercel.app** (mã nguồn Next.js ở repo riêng [TinaCRM-Agent-Zalo-Docs](https://github.com/Tinasoft-Viet-Nam/TinaCRM-Agent-Zalo-Docs)): 10 bước có hình, câu lệnh sao chép, checklist, tìm kiếm.
 
-## Câu lệnh thường dùng (nói với Claude)
+## Câu lệnh thường dùng (nói với trợ lý)
 
-| Bạn nói | Claude làm |
+| Bạn nói | Trợ lý làm |
 |---|---|
 | “Chạy hôm nay” | Lấy hội thoại mới → phân tích → đồng bộ CRM → brief cho từng sale |
-| “Đặt lịch chạy 7 giờ sáng mỗi ngày” | Tạo lịch tự động trong Claude Desktop |
+| “Đặt lịch chạy 7 giờ sáng mỗi ngày” | Tạo lịch tự động trong Claude Desktop hoặc ChatGPT desktop app |
 | “Tạo chiến dịch chốt khách nóng tháng 11” | Đề xuất nhóm khách từ dữ liệu thật, soạn tin, tạo task gọi |
 | “Báo cáo tuần này” | Tổng hợp theo OA/ứng dụng/sale/chiến dịch |
 | “Thêm ứng dụng mới cho sale Lan” | Khai báo và kết nối ứng dụng mới |
 | “Khách của Lan hôm nay” | Lấy riêng khách của một sale theo nhãn |
-| “Khách nào chưa có sale?”, “Giao chị Hoa cho Minh” | Người quản lý giao khách hộ: Claude cho xem trước, duyệt xong mới gắn nhãn Zalo và chuyển task CRM |
+| “Khách nào chưa có sale?”, “Giao chị Hoa cho Minh” | Người quản lý giao khách hộ: trợ lý cho xem trước, duyệt xong mới gắn nhãn Zalo và chuyển task CRM |
 
 ## Cấu trúc thư mục
 
 ```text
 TinaCRM-Agent-Zalo/
-├── CLAUDE.md                        # Chỉ dẫn khởi động cho Claude
+├── AGENTS.md                        # Chỉ dẫn khởi động chính (Codex đọc trực tiếp)
+├── CLAUDE.md                        # @AGENTS.md + ghi chú riêng cho Claude Code
 ├── CLAUDE_PROJECT_INSTRUCTIONS.md   # Bản tóm tắt dùng cho Project (tùy chọn)
 ├── product-marketing.template.md    # Mẫu hồ sơ doanh nghiệp/sản phẩm
 ├── workflows/
 │   ├── USER_GUIDE_FLOW.md           # Chu trình 10 bước, câu mẫu
+│   ├── ASSISTANT_SETUP.md           # Mở workflow và cấp quyền: Claude Code / Codex
 │   ├── MASTER_WORKFLOW.md           # Sơ đồ tổng thể, vai trò agent
 │   ├── ZALO_OA_CONNECTION.md        # Khai báo OA/ứng dụng/sale, kết nối Zalo
 │   ├── TINACRM_CONNECTION.md        # Kết nối TinaCRM qua REST
@@ -54,7 +62,9 @@ TinaCRM-Agent-Zalo/
 │   ├── CAMPAIGNS.md                 # Chiến dịch bán hàng/chăm sóc
 │   └── SCHEDULING.md                # Đặt lịch tự động
 ├── subagents/                       # Vai trò: phân tích, QA, brief, chiến dịch, tin nhắn, báo cáo
-├── .claude/skills/                  # product-marketing, conversation-analysis, zalo-care-messaging, weekly-reporting
+├── .agents/skills/                  # Skills (bản gốc): product-marketing, conversation-analysis, zalo-care-messaging, weekly-reporting
+├── .claude/skills/                  # Bản sao cho Claude Code (python3 scripts/sync_skills.py)
+├── .codex/rules/                    # Quy tắc cho phép lệnh scripts/ của workflow trên Codex
 ├── rules/
 │   ├── data_schemas.md              # Định dạng dữ liệu giữa agent và script
 │   ├── security_privacy_rules.md    # Bảo mật khóa và dữ liệu khách hàng

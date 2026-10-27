@@ -34,7 +34,7 @@ graph TD
 | @CareMessenger | `05_care_messenger.md` | Soạn tin chăm sóc cá nhân hóa, tạo task gọi | `outputs/messages/`, task CRM |
 | @WeeklyReporter | `06_weekly_reporter.md` | Báo cáo tuần theo OA/ứng dụng/sale/chiến dịch | `04_weekly_reports/` |
 
-Tệp vai trò không tự tạo subagent; chỉ gọi subagent khi môi trường hỗ trợ, nếu không Claude xử lý tuần tự theo vai trò.
+Tệp vai trò không tự tạo subagent. Claude Code có thể giao vai trò cho subagent khi môi trường hỗ trợ; Codex chỉ tạo subagent khi người dùng yêu cầu. Mặc định trợ lý xử lý tuần tự theo từng vai trò, đọc tệp vai trò và skill tương ứng trước khi làm.
 
 ## Ánh xạ hội thoại → đối tượng CRM
 

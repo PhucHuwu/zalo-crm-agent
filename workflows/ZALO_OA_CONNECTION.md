@@ -34,7 +34,7 @@ Một ứng dụng chỉ có một sale và một nhãn. Muốn giao toàn bộ 
 
 Hai cách lấy refresh token, hỏi: “1. Lấy bằng công cụ API Explorer của Zalo (nhanh, nên chọn). 2. Cấp quyền qua đường dẫn.”
 
-**Cách 1 – API Explorer:** quản trị OA mở developers.zalo.me/tools/explorer → chọn ứng dụng → loại **OA Access Token** → Lấy Access Token → sao chép **Refresh Token**. Sau đó Claude chạy:
+**Cách 1 – API Explorer:** quản trị OA mở developers.zalo.me/tools/explorer → chọn ứng dụng → loại **OA Access Token** → Lấy Access Token → sao chép **Refresh Token**. Sau đó trợ lý chạy:
 
 - macOS: `sh scripts/zalo_save_app.sh <app_id>`
 - Windows: `powershell -NoProfile -ExecutionPolicy Bypass -STA -File scripts/zalo_save_app.ps1 <app_id>`
@@ -53,16 +53,16 @@ Script chỉ lưu khi Zalo chấp nhận; kết quả `{"ok": true, "oa_id", "oa
 Hai cách, dùng song song:
 
 - **Sale tự gắn:** trong OA Manager (oa.zalo.me), khi nhận chat với khách mới, sale gắn nhãn của mình cho khách. Một khách chỉ nên có một nhãn sale.
-- **Người quản lý nhờ Claude giao hộ** (không cần mở OA Manager). Ví dụ câu người quản lý nói: “Giao chị Hoa cho Minh”, “Khách nào chưa có sale?”, “Giao hết khách chưa phân công hỏi phần mềm kế toán cho Lan”, “Chuyển khách của Minh tên Tuấn sang Lan”.
+- **Người quản lý nhờ trợ lý giao hộ** (không cần mở OA Manager). Ví dụ câu người quản lý nói: “Giao chị Hoa cho Minh”, “Khách nào chưa có sale?”, “Giao hết khách chưa phân công hỏi phần mềm kế toán cho Lan”, “Chuyển khách của Minh tên Tuấn sang Lan”.
 
-### Quy trình Claude giao khách hộ
+### Quy trình trợ lý giao khách hộ
 
 1. **Xác định khách.**
    - Tên/SĐT/công ty: `python3 scripts/zalo_assign.py find "<từ khóa>"`.
    - “Khách chưa phân công”: `python3 scripts/zalo_assign.py unassigned` (gồm `reason = no_tag` hoặc `conflict`, mới nhất trước).
    - Nhiều kết quả trùng tên thì cho người dùng chọn số. Không đoán.
 2. **Xác định sale.** `python3 scripts/zalo_assign.py sales` để xem danh sách. Người dùng nói tên gọi (“Minh”) là đủ; script báo `ambiguous_sale` nếu khớp nhiều người → hỏi lại.
-3. **Đề xuất (khi người dùng nhờ Claude chọn sale):** dựa trên sản phẩm khách hỏi, khu vực, `next_best_action` trong phân tích và số khách hiện có của từng sale. Nêu lý do một dòng cho mỗi khách. Không tự giao.
+3. **Đề xuất (khi người dùng nhờ trợ lý chọn sale):** dựa trên sản phẩm khách hỏi, khu vực, `next_best_action` trong phân tích và số khách hiện có của từng sale. Nêu lý do một dòng cho mỗi khách. Không tự giao.
 4. **Xem trước:** `python3 scripts/zalo_assign.py to "<sale>" <conversation_key> [...] --dry-run`. Trình bày bảng: khách | nhu cầu | sale hiện tại → sale mới | nhãn sẽ gỡ. Hỏi “1. Giao như trên. 2. Sửa. 3. Hủy.”
 5. **Giao:** sau khi người dùng chọn 1, chạy lại cùng lệnh với `--confirm`. Script:
    - gỡ nhãn sale khác, gắn nhãn sale mới trên Zalo;
@@ -97,7 +97,7 @@ Với `recent`, chỉ báo “đọc được N hội thoại gần nhất”, k
 | `code: busy` | Phiên khác đang làm mới token | Chờ 1 phút, chạy lại |
 | OA trả về khác cấu hình (`wrong_oa`) | Ứng dụng trỏ nhầm OA | Sửa `accounts.json` hoặc cấp quyền lại đúng OA |
 | `missing_sale_tag` | Ứng dụng chưa khai báo nhãn | Hỏi tên nhãn, ghi vào `sale_tag` |
-| Nhiều khách “chưa phân công” | Sale chưa gắn nhãn | Người quản lý nhờ Claude giao (`zalo_assign.py unassigned` → `to … --dry-run` → `--confirm`), hoặc nhắc sale gắn nhãn |
+| Nhiều khách “chưa phân công” | Sale chưa gắn nhãn | Người quản lý nhờ trợ lý giao (`zalo_assign.py unassigned` → `to … --dry-run` → `--confirm`), hoặc nhắc sale gắn nhãn |
 | `ambiguous_sale` / `sale_not_found` | Tên sale khớp nhiều người hoặc không có | Hỏi lại người dùng, đưa danh sách `sales` |
 
 ## Giới hạn API (đã đối chiếu tài liệu Zalo 10/2026)
