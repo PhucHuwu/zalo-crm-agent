@@ -4,7 +4,7 @@
 <text x="45" y="55" font-size="25" font-weight="700">Đặt tài liệu vào đúng thư mục</text>
 <text x="45" y="88" font-size="17" fill="#53655a">Sơ đồ minh họa • Mở thư mục theo thứ tự từ trái sang phải</text>
 <rect x="45" y="230" width="225" height="105" rx="12" fill="#24644e"/>
-<text x="67" y="270" font-size="20" font-weight="700" fill="#fff">zalo-crm-agent</text><text x="67" y="300" font-size="17" fill="#e7f1e8">Thư mục đã giải nén</text>
+<text x="67" y="270" font-size="17" font-weight="700" fill="#fff">TinaCRM-Agent-Zalo-main</text><text x="67" y="300" font-size="17" fill="#e7f1e8">Thư mục đã giải nén</text>
 <path d="M270 283H320V199H370 M320 283V425H370" fill="none" stroke="#758c7b" stroke-width="3"/>
 <rect x="370" y="150" width="170" height="100" rx="12" fill="#fff" stroke="#b8cabd"/>
 <text x="392" y="191" font-size="23" font-weight="700">inputs</text><text x="392" y="220" font-size="16">Bạn đặt tài liệu</text>

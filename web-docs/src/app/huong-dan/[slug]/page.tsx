@@ -28,7 +28,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       <h1>{step > 0 && <span className="step-prefix">Bước {step}.</span>} {guide.title}</h1>
       <p>{guide.description}</p>
     </header>
-    {guide.slug === "mo-workflow" && <p style={{ marginBottom: 28 }}><a className="button button-primary" href="https://github.com/PhucHuwu/zalo-crm-agent" target="_blank" rel="noreferrer">Mở trang tải workflow <ExternalLinkIcon /></a></p>}
+    {guide.slug === "mo-workflow" && <p style={{ marginBottom: 28 }}><a className="button button-primary" href="https://github.com/Tinasoft-Viet-Nam/TinaCRM-Agent-Zalo" target="_blank" rel="noreferrer">Mở trang tải workflow <ExternalLinkIcon /></a></p>}
     {guide.sections.map((section) => <section className="article-section" id={section.id} key={section.id}>
       <h2>{section.title}</h2>
       {section.paragraphs?.map((p) => <p key={p}>{p}</p>)}

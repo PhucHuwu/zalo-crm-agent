@@ -41,7 +41,7 @@ Website hướng dẫn từng bước: **https://zalo-crm-agent.vercel.app** (m�
 ## Cấu trúc thư mục
 
 ```text
-zalo-crm-agent/
+TinaCRM-Agent-Zalo/
 ├── CLAUDE.md                        # Chỉ dẫn khởi động cho Claude
 ├── CLAUDE_PROJECT_INSTRUCTIONS.md   # Bản tóm tắt dùng cho Project (tùy chọn)
 ├── product-marketing.template.md    # Mẫu hồ sơ doanh nghiệp/sản phẩm

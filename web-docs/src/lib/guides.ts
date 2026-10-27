@@ -25,13 +25,13 @@ export const cycle: Guide[] = [
     slug: "mo-workflow", title: "Tải và mở workflow bằng Claude Code", shortTitle: "Tải & mở workflow", actor: "Bạn làm trên máy",
     description: "Tải ZIP từ GitHub, đặt tài liệu doanh nghiệp vào inputs, rồi mở thư mục trong Claude Desktop → tab Code. Cần gói Pro, Max, Team hoặc Enterprise.",
     sections: [
-      { id: "download", title: "Tải workflow: Code → Download ZIP", paragraphs: ["Giải nén ra một thư mục, ví dụ zalo-crm-agent. Mỗi doanh nghiệp dùng một thư mục riêng, và mỗi OA chỉ chạy ở một thư mục, trên một máy."] },
+      { id: "download", title: "Tải workflow: Code → Download ZIP", paragraphs: ["Giải nén ra thư mục TinaCRM-Agent-Zalo-main. Mỗi doanh nghiệp dùng một thư mục riêng, và mỗi OA chỉ chạy ở một thư mục, trên một máy."] },
       { id: "inputs", title: "Đặt tài liệu vào inputs", steps: [
         { title: "inputs/01_company_info", body: "Hồ sơ công ty, hồ sơ năng lực, khách hàng tiêu biểu." },
         { title: "inputs/02_marketing_materials", body: "Danh mục sản phẩm/dịch vụ, bảng giá, chính sách bán hàng, câu hỏi khách hay hỏi." }
       ], paragraphs: ["Ưu tiên PDF, Word, Excel có chữ. Ảnh scan có thể không đọc được. Chưa có tài liệu cũng được: ở bước 2 Claude có thể đọc website hoặc hỏi bạn từng câu."] },
       { id: "overview", title: "Mở Claude Desktop → tab Code" },
-      { id: "folder", title: "Chọn thư mục workflow", paragraphs: ["Choose… → Open folder… → chọn thư mục zalo-crm-agent (thư mục có tệp CLAUDE.md). Chọn This computer, không chạy trên đám mây: khóa Zalo và TinaCRM chỉ nằm trên máy này."] },
+      { id: "folder", title: "Chọn thư mục workflow", paragraphs: ["Choose… → Open folder… → chọn thư mục TinaCRM-Agent-Zalo-main (thư mục có tệp CLAUDE.md). Chọn This computer, không chạy trên đám mây: khóa Zalo và TinaCRM chỉ nằm trên máy này."] },
       { id: "permissions", title: "Chọn quyền: Manual", steps: [
         { title: "Auto", body: "Claude tự quyết định việc nào cần hỏi. Không nên dùng khi mới bắt đầu." },
         { title: "Manual (nên chọn)", body: "Luôn hỏi bạn trước khi sửa tệp hoặc chạy lệnh." },
