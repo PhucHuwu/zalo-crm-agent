@@ -139,7 +139,7 @@ Do agent phân tích (`subagents/01_conversation_analyst.md`) viết; `scripts/c
 
 Do `scripts/crm_sync.py` ghi: mỗi hội thoại `status` = `synced` / `skipped` / `needs_review` / `failed`, kèm hành động trên CRM (`created`, `existing`, `updated`) và ID bản ghi.
 
-`config/state/crm_ledger.json` giữ ID person/company/opportunity theo `conversation_key` và dấu của note/task đã đẩy, để chạy lại không tạo trùng. Không sửa tay.
+`config/state/crm_ledger.json` giữ ID person/company/opportunity theo `conversation_key`, dấu của note/task đã đẩy (để chạy lại không tạo trùng) và `task_ids` (để `zalo_assign.py` chuyển task chưa xong khi đổi sale). Không sửa tay.
 
 ---
 

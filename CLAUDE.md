@@ -14,7 +14,7 @@ Doanh nghiệp (1 thư mục workflow)
 ```
 
 - Mỗi ứng dụng có Secret Key và refresh token riêng, lưu ở `config/secrets/zalo/<app_id>.json` (không commit, không in ra, không đọc vào chat).
-- Zalo **không** tách hội thoại theo ứng dụng: mọi ứng dụng của cùng một OA đọc được toàn bộ hội thoại của OA. Vì vậy mỗi OA chỉ được đọc một lần mỗi ngày (qua `reader_app_id`), và khách được giao cho sale theo **nhãn Zalo** (`applications[].sale_tag`, ví dụ “Sale: Minh”). Sale gắn nhãn trong OA Manager, hoặc Claude gắn bằng `scripts/zalo_assign.py` sau khi người dùng đồng ý.
+- Zalo **không** tách hội thoại theo ứng dụng: mọi ứng dụng của cùng một OA đọc được toàn bộ hội thoại của OA. Vì vậy mỗi OA chỉ được đọc một lần mỗi ngày (qua `reader_app_id`), và khách được giao cho sale theo **nhãn Zalo** (`applications[].sale_tag`, ví dụ “Sale: Minh”). Sale gắn nhãn trong OA Manager, hoặc người quản lý nhờ Claude giao hộ (“Giao chị Hoa cho Minh”): Claude dùng `scripts/zalo_assign.py` (find/unassigned → `to --dry-run` → duyệt → `--confirm`), gắn nhãn Zalo và chuyển task CRM chưa xong sang sale mới. Xem `workflows/ZALO_OA_CONNECTION.md` mục “Quy trình Claude giao khách hộ”.
 - Khách chưa có nhãn sale, hoặc có hai nhãn sale cùng lúc, thì `owner = null`: khách vào hàng “chưa phân công” để quản lý giao. Task CRM của các khách này được giao cho `assignment.manager_crm_member_id`.
 - TinaCRM là nơi lưu dữ liệu chính thức. `config/state/customers.json` là chỉ mục cục bộ để chọn khách cho chiến dịch.
 

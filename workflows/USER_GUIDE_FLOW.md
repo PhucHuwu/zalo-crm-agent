@@ -31,7 +31,7 @@ Sau bước 10, chu trình lặp lại từ bước 7; chiến dịch mới quay
 |---|---|
 | “Đọc CLAUDE.md và tài liệu trong inputs…” | 2 |
 | “Thêm OA…”, “Thêm ứng dụng/tài khoản con…”, “Đổi sale phụ trách…” | 3 |
-| “Giao khách … cho sale …”, “Khách chưa phân công” | `ZALO_OA_CONNECTION.md` mục “Giao khách cho sale” |
+| “Giao khách … cho sale …”, “Khách nào chưa có sale?”, “Chuyển khách … sang …” | `ZALO_OA_CONNECTION.md` mục “Quy trình Claude giao khách hộ” |
 | “Khách của <sale> hôm nay” | `DAILY_RUN.md` bước 1, `--app <app_id>` |
 | “Kết nối Zalo…”, “Kết nối lại ứng dụng…” | 4 |
 | “Kết nối TinaCRM…” | 5 |

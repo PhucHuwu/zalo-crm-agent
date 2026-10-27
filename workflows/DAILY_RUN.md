@@ -67,6 +67,8 @@ Chưa phân công: <u> khách (cần quản lý chọn sale) | không có.
 Lỗi kết nối: <ứng dụng – việc cần làm> | không có.
 ```
 
+Khi chạy tay và có khách chưa phân công, hỏi tiếp: “1. Giao khách chưa phân công ngay (tôi đề xuất sale cho từng khách). 2. Để sau.” Chọn 1 → `ZALO_OA_CONNECTION.md` mục “Quy trình Claude giao khách hộ”.
+
 Cập nhật dòng “Lần chạy hằng ngày gần nhất” trong `config/workflow_progress.md`.
 
 ## Khi chạy theo lịch

@@ -163,6 +163,8 @@ def sync_one(t, a, ledger, cfg, accounts):
         r = t.run("create-task", {"title": tk["title"], "body": body, "dueAt": due_iso(tk, cfg.get("tz_offset", "+07:00")),
                                   "assigneeId": assignee, **targets})
         entry["pushed"].append(h)
+        if not t.dry:  # kept so scripts/zalo_assign.py can move open tasks when the customer changes sale
+            entry.setdefault("task_ids", []).append(r["id"])
         out["actions"].append({"task": r["action"], "id": r["id"]})
     entry["last_synced"] = datetime.now().isoformat(timespec="seconds")
     return out

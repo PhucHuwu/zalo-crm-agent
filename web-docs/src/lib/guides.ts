@@ -116,7 +116,12 @@ export const cycle: Guide[] = [
     sections: [
       { id: "routine", title: "Câu lệnh", paragraphs: ["Claude chỉ lấy tin mới kể từ lần chạy trước. Chạy lại trong cùng ngày không tạo trùng."], prompt: "Chạy hôm nay." },
       { id: "one-sale", title: "Xem khách của một sale", prompt: "Khách của <tên sale> hôm nay." },
-      { id: "assign", title: "Giao và chuyển khách", paragraphs: ["Tóm tắt mỗi ngày liệt kê khách chưa có nhãn sale. Cách tốt nhất là sale tự gắn nhãn của mình trong OA Manager (oa.zalo.me) khi nhận khách. Bạn cũng có thể nhờ Claude gắn: Claude cho xem danh sách trước, bạn duyệt mới gắn."], prompt: "Giao khách <tên khách> cho <tên sale>." },
+      { id: "assign", title: "Người quản lý giao khách cho sale", paragraphs: ["Không cần mở OA Manager: người quản lý nhắn Claude là đủ. Claude tìm khách, cho xem bảng khách → sale trước khi làm. Bạn chọn “Giao như trên” thì Claude mới gắn nhãn Zalo của sale mới (gỡ nhãn sale cũ) và chuyển các task chưa xong trên TinaCRM sang sale đó.", "Sale vẫn có thể tự gắn nhãn của mình trong OA Manager khi nhận khách. Hai cách dùng song song được."], steps: [
+        { title: "Xem khách chưa có sale", body: "“Khách nào chưa có sale?” — Claude liệt kê, khách mới nhắn đứng trước." },
+        { title: "Giao từng khách", body: "“Giao chị Hoa cho Minh.” Trùng tên thì Claude hỏi bạn chọn." },
+        { title: "Nhờ Claude đề xuất", body: "“Đề xuất sale cho các khách chưa phân công.” Claude gợi ý theo sản phẩm, khu vực và số khách mỗi sale đang giữ, kèm lý do. Bạn duyệt rồi mới giao." },
+        { title: "Chuyển khách", body: "“Chuyển khách Tuấn từ Minh sang Lan.”" }
+      ], prompt: "Khách nào chưa có sale? Đề xuất sale cho từng khách, cho tôi xem trước rồi mới giao." },
       { id: "schedule", title: "Chạy tự động theo lịch", paragraphs: ["Claude hỏi giờ chạy (nên chọn 7:30 sáng ngày làm việc để sale có brief đầu ngày), và có tự đẩy CRM hay chờ bạn duyệt, rồi tự tạo lịch.", "Mỗi lần chạy hiện thành một phiên mới ở mục Scheduled bên trái. Lần đầu nếu ứng dụng hỏi quyền, bấm Always allow cho đúng các lệnh python3 scripts/… của workflow.", "Lịch chỉ chạy khi máy bật và Claude Desktop đang mở. Bỏ lỡ thì chạy bù khi mở lại, không mất tin."], prompt: "Đặt lịch chạy tự động hằng ngày." },
       { id: "outputs", title: "Kết quả nằm ở đâu" }
     ]
@@ -166,7 +171,8 @@ export const help: Guide = {
   sections: [
     { id: "faq", title: "Câu hỏi", faqs: [
       { question: "Mỗi ứng dụng có thấy riêng hội thoại của sale đó không?", answer: "Không. Zalo không tách hội thoại theo ứng dụng: mọi ứng dụng của cùng một OA đều thấy toàn bộ hội thoại. Vì vậy workflow dùng nhãn Zalo “Sale: <tên>” để biết khách thuộc ai." },
-      { question: "Nhiều khách “chưa phân công”?", answer: "Sale chưa gắn nhãn cho khách. Nhắc sale gắn nhãn của mình trong OA Manager, hoặc nhắn Claude “Giao khách <tên> cho <sale>”. Trong lúc chờ, task CRM của các khách này giao cho người quản lý." },
+      { question: "Nhiều khách “chưa phân công”?", answer: "Sale chưa gắn nhãn cho khách. Người quản lý nhắn Claude “Khách nào chưa có sale?” rồi “Giao … cho …” (bước 7). Trong lúc chờ, task CRM của các khách này giao cho người quản lý." },
+      { question: "Giao khách xong thì task trên TinaCRM thế nào?", answer: "Các task chưa xong do workflow tạo được chuyển sang sale mới; task đã xong giữ nguyên. Sale mới cũng thấy khách trong brief từ lần chạy tiếp theo." },
       { question: "Khách có nhãn của hai sale?", answer: "Claude đánh dấu cần xem lại và hỏi bạn giữ sale nào, rồi gỡ nhãn sale kia." },
       { question: "Sale nghỉ việc, chuyển khách cho người khác?", answer: "Nhắn Claude “Đổi sale phụ trách ứng dụng <tên> thành <sale mới>”. Toàn bộ khách mang nhãn đó chuyển theo, không cần gắn lại." },
       { question: "Báo lỗi cần cấp quyền lại Zalo (reauthorize)?", answer: "Refresh Token đã hết hạn hoặc đã bị dùng ở nơi khác. Người quản trị OA lấy Refresh Token mới (bước 4) rồi nhắn “Kết nối lại ứng dụng <tên>”." },

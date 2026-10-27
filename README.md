@@ -35,7 +35,8 @@ Website hướng dẫn từng bước: **https://zalo-crm-agent.vercel.app** (m�
 | “Tạo chiến dịch chốt khách nóng tháng 11” | Đề xuất nhóm khách từ dữ liệu thật, soạn tin, tạo task gọi |
 | “Báo cáo tuần này” | Tổng hợp theo OA/ứng dụng/sale/chiến dịch |
 | “Thêm ứng dụng mới cho sale Lan” | Khai báo và kết nối ứng dụng mới |
-| “Khách của Lan hôm nay”, “Giao chị Hoa cho Minh” | Lấy riêng khách của một sale theo nhãn; giao/chuyển khách bằng nhãn Zalo |
+| “Khách của Lan hôm nay” | Lấy riêng khách của một sale theo nhãn |
+| “Khách nào chưa có sale?”, “Giao chị Hoa cho Minh” | Người quản lý giao khách hộ: Claude cho xem trước, duyệt xong mới gắn nhãn Zalo và chuyển task CRM |
 
 ## Cấu trúc thư mục
 
@@ -61,7 +62,7 @@ zalo-crm-agent/
 ├── scripts/
 │   ├── zalo_oa.py                   # Gọi Zalo OA API (token, hội thoại, hồ sơ, nhãn, gửi tin)
 │   ├── zalo_fetch_daily.py          # Lấy hội thoại mới mỗi ngày (mỗi OA một lần), giao sale theo nhãn
-│   ├── zalo_assign.py               # Giao/chuyển khách cho sale bằng nhãn Zalo
+│   ├── zalo_assign.py               # Giao/chuyển khách cho sale (nhãn Zalo + task CRM), xem trước rồi mới giao
 │   ├── zalo_save_app.sh / .ps1      # Hộp thoại nhập Secret Key/token cho ứng dụng
 │   ├── crm_sync.py                  # Đẩy kết quả phân tích lên TinaCRM (chống trùng)
 │   ├── tinacrm_rest.py              # Gọi TinaCRM REST API
