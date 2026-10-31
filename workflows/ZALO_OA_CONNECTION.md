@@ -28,25 +28,51 @@ Ghi `config/accounts.json` theo `config/accounts.example.json`, trình bày bả
 
 Một ứng dụng chỉ có một sale và một nhãn. Muốn giao toàn bộ khách của sale cũ cho sale mới: đổi `sale` của ứng dụng, giữ nguyên `sale_tag`. Muốn chuyển một khách: xem mục “Giao khách cho sale” bên dưới.
 
-**Ứng dụng chưa có?** Hướng dẫn người quản trị OA (một thao tác mỗi lượt): developers.zalo.me → Tạo ứng dụng → Sản phẩm **Official Account** → liên kết OA → bật quyền **quản lý tin nhắn người dùng**, **quản lý thông tin người dùng** và **quản lý thông tin OA** (để gắn nhãn) → khai báo Callback URL (nếu dùng cách 2 dưới đây). Tên nút có thể khác theo phiên bản; nếu không chắc, nhờ người dùng chụp màn hình (che dữ liệu nhạy cảm).
+### Ứng dụng chưa có? (đã làm thử thật 10/2026)
+
+Hướng dẫn người quản trị OA, mỗi lượt một thao tác. Ai tạo ứng dụng cũng được, nhưng bước cấp quyền (bước 4) phải do **quản trị viên OA** làm.
+
+1. **Tạo ứng dụng:** developers.zalo.me → đăng nhập → **Ứng dụng của tôi** → **Tạo mới**. Đặt tên dễ nhận ra sale, ví dụ “Sale Minh”.
+2. **Điền thông tin và kích hoạt** (trang **Cài đặt** của ứng dụng). Ứng dụng **chưa kích hoạt** thì mọi API trả lỗi `-209 App has been not approved`, kể cả khi đã lưu khóa thành công.
+   - Điền đủ các ô bắt buộc: Tên hiển thị, **Điện thoại liên hệ**, **Email liên hệ**, Danh mục, Mô tả.
+   - Tải **Icon ứng dụng 512×512** (Choose File → chọn vùng → **Lưu**). Thiếu icon thì Zalo báo “Vui lòng cập nhật Icon để có thể kích hoạt ứng dụng”.
+   - Bấm **Lưu thay đổi**.
+   - Bật công tắc **Chưa kích hoạt** ở góc trên bên phải → **Đồng ý**. Khi xong công tắc ghi **Đang hoạt động**.
+3. **Chọn quyền:** menu trái **Sản phẩm → Official Account → Thiết lập chung**. Mặc định mọi quyền đã được chọn; tối thiểu cần **Quyền: Quản lý tin nhắn người dùng** (đọc/gửi tin) và **Quyền: Quản lý thông tin OA** (danh sách, thông tin người dùng, nhãn). Bấm **Lưu**. Callback URL chỉ cần khi dùng cách 2 bên dưới.
+4. **Cấp quyền OA cho ứng dụng:** làm ở bước Lưu khóa, cách 1 (API Explorer).
+
+**Không dùng ô “Liên kết với Official Account”** ở trang **Quản lý OA**: mỗi OA chỉ liên kết được một ứng dụng, liên kết ứng dụng mới sẽ gỡ ứng dụng cũ. Workflow chỉ cần **cấp quyền**, một OA cấp quyền được cho nhiều ứng dụng. Sau khi cấp quyền, trang **Quản lý OA** của ứng dụng hiện OA trong “Danh sách OA đã cấp quyền”.
+
+Tên nút có thể khác theo phiên bản; nếu không chắc, nhờ người dùng chụp màn hình (che dữ liệu nhạy cảm).
 
 ## Lưu khóa (bước 4)
 
 Hai cách lấy refresh token, hỏi: “1. Lấy bằng công cụ API Explorer của Zalo (nhanh, nên chọn). 2. Cấp quyền qua đường dẫn.”
 
-**Cách 1 – API Explorer:** quản trị OA mở developers.zalo.me/tools/explorer → chọn ứng dụng → loại **OA Access Token** → Lấy Access Token → sao chép **Refresh Token**. Sau đó trợ lý chạy:
+**Cách 1 – API Explorer** (quản trị viên OA làm):
+
+1. Mở `https://developers.zalo.me/tools/explorer/<app_id>` (hoặc menu **Công cụ → API Explorer**, rồi chọn ứng dụng ở ô **Chọn ứng dụng**).
+2. Ô **Loại access token**: đổi từ *User Access Token* sang **OA Access Token**.
+3. Bấm **Lấy Access Token** → danh sách OA hiện ra → chọn OA.
+4. Hộp **Thông báo** cảnh báo token cũ của ứng dụng này với OA này sẽ hết hiệu lực → **Tôi đã hiểu và muốn tiếp tục**.
+5. Cửa sổ **Yêu cầu cấp quyền truy cập Official Account** mở ra: cuộn xuống cuối, tick **Tôi đã đọc và hoàn toàn đồng ý Điều khoản…** → **Cấp quyền**.
+6. Quay lại API Explorer: ô **Access token** và **Refresh token** đã có giá trị. **Không** tải lại trang, không bấm Reset hay Lấy Access Token lần nữa (token vừa lấy sẽ mất hoặc hết hạn).
+
+Sau đó trợ lý chạy:
 
 - macOS: `sh scripts/zalo_save_app.sh <app_id>`
 - Windows: `powershell -NoProfile -ExecutionPolicy Bypass -STA -File scripts/zalo_save_app.ps1 <app_id>`
 
-Nói trước: “Một hộp thoại Kết nối Zalo OA sẽ hiện ra: dán Khóa bí mật của ứng dụng, rồi dán Refresh Token, bấm Lưu.”
+Nói trước (macOS hiện hai hộp thoại liên tiếp; Windows là một cửa sổ có hai ô, bấm Lưu): “Hộp thoại Kết nối Zalo OA sẽ hiện ra. Lần 1: vào trang Cài đặt của ứng dụng, bấm nút sao chép ở ô Khóa bí mật của ứng dụng, dán vào rồi bấm Tiếp. Lần 2: ở API Explorer bấm nút sao chép cạnh ô **Refresh token** (ô thứ hai, không phải Access token), dán vào rồi bấm Tiếp.” Mỗi lần sao chép xong thì dán ngay.
+
+Lấy token mới ở API Explorer làm token cũ của cùng ứng dụng + OA hết hiệu lực. Nếu lưu báo `Invalid refresh token`, thường là đã dán token cũ hoặc trang Explorer đã bị tải lại: lấy token mới (bước 2–6) rồi chạy lại hộp thoại.
 
 **Cách 2 – Đường dẫn cấp quyền (PKCE):**
 1. `python3 scripts/zalo_oa.py <app_id> auth-url <callback_url_đã_khai_báo>` → đưa đường dẫn `url` cho quản trị OA mở và bấm cho phép.
 2. Trình duyệt chuyển tới callback URL có `?code=...`. Người dùng chỉ cần sao chép phần sau `code=` (đến trước `&`).
 3. Chạy `zalo_save_app.sh <app_id> code` (Windows: thêm `-Mode code`). Mã code hết hạn sau ~10 phút.
 
-Script chỉ lưu khi Zalo chấp nhận; kết quả `{"ok": true, "oa_id", "oa_name"}`. Đối chiếu `oa_name` với OA người dùng khai báo; ghi `oa_id` vào `config/accounts.json` nếu chưa có. Không bao giờ `cat`/đọc tệp trong `config/secrets/`.
+Script chỉ lưu khi Zalo chấp nhận token; kết quả `{"ok": true, "oa_id", "oa_name"}`. Nếu khóa đã lưu nhưng gọi OA lỗi, kết quả có `"token_saved": true` và `hint`: sửa nguyên nhân (thường là chưa kích hoạt ứng dụng) rồi chạy `check`, không cần dán khóa lại. Đối chiếu `oa_name` với OA người dùng khai báo; ghi `oa_id` vào `config/accounts.json` nếu chưa có. Không bao giờ `cat`/đọc tệp trong `config/secrets/`.
 
 ## Giao khách cho sale (nhãn Zalo)
 
@@ -75,7 +101,7 @@ Không giao khách khi chạy theo lịch (không ai duyệt). Lệnh cũ một 
 - **Kiểm tra nhãn:** `python3 scripts/zalo_assign.py check-tags` cho biết nhãn của từng sale đã có trên OA chưa. Trạng thái `not_created_on_oa` không phải lỗi: nhãn sẽ tự được tạo khi gắn cho khách đầu tiên.
 - **Khách chưa phân công** (`owner = null`, `assignment.by = none`): lần chạy hằng ngày vẫn phân tích, và task CRM giao cho người quản lý. Tóm tắt hằng ngày liệt kê các khách này và hỏi người quản lý có muốn giao luôn không (quy trình trên).
 - **Xung đột** (`assignment.by = conflict`, khách có nhãn của từ 2 sale trở lên): đánh dấu cần xem lại, rồi hỏi người dùng nên giữ sale nào.
-- Ứng dụng đọc nhãn cần có quyền **quản lý thông tin người dùng**. Ứng dụng gắn hoặc gỡ nhãn cần có quyền **quản lý thông tin OA**.
+- Đọc và gắn/gỡ nhãn cần **Quyền: Quản lý thông tin OA** (gồm thông tin người dùng và quản lý nhãn).
 
 ## Kiểm tra
 
@@ -93,6 +119,9 @@ Với `recent`, chỉ báo “đọc được N hội thoại gần nhất”, k
 | `code: missing_secret` | Ứng dụng chưa lưu khóa | Chạy hộp thoại lưu khóa |
 | `code: reauthorize` | Refresh token hết hạn/đã dùng/bị thu hồi | Quản trị OA cấp lại (cách 1 hoặc 2) |
 | `oauth_rejected` khi lưu | Sai Secret Key, token, hoặc code hết hạn | Kiểm tra lại, lấy token/code mới |
+| `Invalid refresh token` (-14014) khi lưu | Dán token cũ, hoặc trang Explorer đã tải lại / lấy token mới | Lấy token mới ở API Explorer, dán ngay |
+| `zalo_error -209` (App has been not approved) | Ứng dụng chưa kích hoạt | Cài đặt: điền điện thoại, email, icon 512×512 → Lưu thay đổi → bật kích hoạt. Khóa đã lưu thì chỉ cần chạy `check` |
+| `Không kết nối được tới Zalo` + `CERTIFICATE_VERIFY_FAILED` | Python trên máy thiếu chứng chỉ SSL | Script tự dùng `certifi` hoặc `/etc/ssl/cert.pem`; nếu vẫn lỗi, cài `certifi` (`python3 -m pip install certifi`) hoặc chạy “Install Certificates” của Python |
 | `zalo_error -32` hoặc quyền | Ứng dụng chưa được cấp quyền quản lý tin nhắn | Quản trị OA bật quyền cho ứng dụng |
 | `code: busy` | Phiên khác đang làm mới token | Chờ 1 phút, chạy lại |
 | OA trả về khác cấu hình (`wrong_oa`) | Ứng dụng trỏ nhầm OA | Sửa `accounts.json` hoặc cấp quyền lại đúng OA |

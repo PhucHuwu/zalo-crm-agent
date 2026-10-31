@@ -24,6 +24,7 @@ Output: one JSON object on stdout, {"ok": true, ...} or {"ok": false, "error": .
 """
 import json
 import os
+import ssl
 import sys
 import time
 import urllib.error
@@ -102,6 +103,25 @@ class Lock:
             pass
 
 
+def _ssl_context():
+    # Some Python installs (Homebrew, python.org without "Install Certificates") ship no CA bundle.
+    paths = ssl.get_default_verify_paths()
+    if paths.cafile and os.path.isfile(paths.cafile):
+        return ssl.create_default_context()
+    try:
+        import certifi
+        return ssl.create_default_context(cafile=certifi.where())
+    except ImportError:
+        pass
+    for cafile in ("/etc/ssl/cert.pem", "/etc/ssl/certs/ca-certificates.crt"):
+        if os.path.isfile(cafile):
+            return ssl.create_default_context(cafile=cafile)
+    return ssl.create_default_context()
+
+
+SSL_CONTEXT = _ssl_context()
+
+
 def http(method, url, headers=None, data=None, timeout=60):
     body = None
     headers = dict(headers or {})
@@ -113,7 +133,7 @@ def http(method, url, headers=None, data=None, timeout=60):
             body = json.dumps(data, ensure_ascii=False).encode()
     req = urllib.request.Request(url, data=body, method=method, headers=headers)
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as r:
+        with urllib.request.urlopen(req, timeout=timeout, context=SSL_CONTEXT) as r:
             text = r.read().decode("utf-8", "replace")
     except urllib.error.HTTPError as e:
         text = e.read().decode("utf-8", "replace")
@@ -187,7 +207,12 @@ class ZaloApp:
             self._refresh(force=True)
             return self.call(method, path, params, body, _retry=False)
         if err not in (0, None):
-            raise ZaloError(f"Zalo lỗi {err}: {res.get('message')}", zalo_error=err)
+            extra = {"zalo_error": err}
+            if err == -209:
+                extra["hint"] = ("Ứng dụng chưa được kích hoạt: vào developers.zalo.me → ứng dụng → Cài đặt, "
+                                 "điền Điện thoại và Email liên hệ, bấm Lưu thay đổi, rồi bật công tắc "
+                                 "\"Chưa kích hoạt\" thành \"Đang hoạt động\".")
+            raise ZaloError(f"Zalo lỗi {err}: {res.get('message')}", **extra)
         time.sleep(0.15)  # stay well below Zalo's per-app rate limit
         return res
 
@@ -266,8 +291,16 @@ def init_app(app_id, payload):
         res = oauth_request(app_id, secret_key, params)
         store_tokens(app_id, {"secret_key": secret_key}, res)
     (SECRETS_DIR / f"{app_id}.pkce.json").unlink(missing_ok=True)
-    info = ZaloApp(app_id).oa_info()
-    return {"ok": True, "saved": str(secret_path(app_id).relative_to(ROOT)),
+    saved = str(secret_path(app_id).relative_to(ROOT))
+    try:
+        info = ZaloApp(app_id).oa_info()
+    except ZaloError as e:
+        # Token is valid and stored; the OA API itself refused (e.g. -209: app not activated).
+        return {"ok": False, "saved": saved, "token_saved": True, "error": str(e),
+                "zalo_error": e.extra.get("zalo_error"),
+                "hint": " ".join(filter(None, [e.extra.get("hint"),
+                                               "Khóa đã lưu; sửa xong chạy check, không cần dán khóa lại."]))}
+    return {"ok": True, "saved": saved,
             "oa_id": str(info.get("oa_id", "")), "oa_name": info.get("name")}
 
 
