@@ -104,12 +104,26 @@ class Client:
         data = self.call("GET", f"/{plural}?limit={limit}&filter={quote(flt)}")
         return data.get("data", {}).get(plural, [])
 
+    def write(self, method, path, body):
+        """Workspaces differ (e.g. some have no person.city): drop fields the object lacks and retry."""
+        self.dropped = []
+        while True:
+            try:
+                return self.call(method, path, body)
+            except TinaError as e:
+                msgs = " ".join(str(m) for m in (e.extra.get("detail") or {}).get("messages", []))
+                m = re.search(r"doesn't have any \"([^\"]+)\" field", msgs)
+                if not m or m.group(1) not in body:
+                    raise
+                body = {k: v for k, v in body.items() if k != m.group(1)}
+                self.dropped.append(m.group(1))
+
     def create(self, plural, singular, body):
-        data = self.call("POST", f"/{plural}", body)
+        data = self.write("POST", f"/{plural}", body)
         return data.get("data", {}).get(f"create{singular[0].upper()}{singular[1:]}", data)
 
     def update(self, plural, singular, rec_id, body):
-        data = self.call("PATCH", f"/{plural}/{rec_id}", body)
+        data = self.write("PATCH", f"/{plural}/{rec_id}", body)
         return data.get("data", {}).get(f"update{singular[0].upper()}{singular[1:]}", data)
 
 
@@ -294,7 +308,10 @@ def main():
                 "create-note": create_note}
     if cmd not in handlers:
         raise TinaError(f"unknown command {cmd}")
-    return handlers[cmd](c, arg)
+    out = handlers[cmd](c, arg)
+    if getattr(c, "dropped", None):
+        out["dropped_fields"] = c.dropped
+    return out
 
 
 if __name__ == "__main__":

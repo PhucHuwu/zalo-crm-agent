@@ -212,6 +212,11 @@ class ZaloApp:
                 extra["hint"] = ("Ứng dụng chưa được kích hoạt: vào developers.zalo.me → ứng dụng → Cài đặt, "
                                  "điền Điện thoại và Email liên hệ, bấm Lưu thay đổi, rồi bật công tắc "
                                  "\"Chưa kích hoạt\" thành \"Đang hoạt động\".")
+            if err == -212:
+                extra["hint"] = ("Ứng dụng chưa được cấp quyền API này (thường là thông tin người dùng/nhãn): "
+                                 "quản trị OA vào developers.zalo.me → ứng dụng → Official Account → Thiết lập chung, "
+                                 "tick đủ quyền (Quản lý thông tin OA, thông tin người dùng), Lưu, rồi cấp quyền lại "
+                                 "qua API Explorer và chạy lại zalo_save_app.")
             raise ZaloError(f"Zalo lỗi {err}: {res.get('message')}", **extra)
         time.sleep(0.15)  # stay well below Zalo's per-app rate limit
         return res

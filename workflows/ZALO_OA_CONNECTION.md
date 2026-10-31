@@ -122,6 +122,7 @@ Với `recent`, chỉ báo “đọc được N hội thoại gần nhất”, k
 | `Invalid refresh token` (-14014) khi lưu | Dán token cũ, hoặc trang Explorer đã tải lại / lấy token mới | Lấy token mới ở API Explorer, dán ngay |
 | `zalo_error -209` (App has been not approved) | Ứng dụng chưa kích hoạt | Cài đặt: điền điện thoại, email, icon 512×512 → Lưu thay đổi → bật kích hoạt. Khóa đã lưu thì chỉ cần chạy `check` |
 | `Không kết nối được tới Zalo` + `CERTIFICATE_VERIFY_FAILED` | Python trên máy thiếu chứng chỉ SSL | Script tự dùng `certifi` hoặc `/etc/ssl/cert.pem`; nếu vẫn lỗi, cài `certifi` (`python3 -m pip install certifi`) hoặc chạy “Install Certificates” của Python |
+| `zalo_error -212` (App has not registed this api), hoặc `profile_errors` trong kết quả lấy hội thoại | Ứng dụng chưa có quyền API thông tin người dùng: không đọc được nhãn sale, không giao khách được (tin nhắn vẫn lấy được) | Quản trị OA vào ứng dụng → Official Account → Thiết lập chung, tick đủ quyền (Quản lý thông tin OA, thông tin người dùng) → Lưu, rồi cấp quyền lại qua API Explorer và lưu token mới bằng hộp thoại. Kiểm tra: `zalo_assign.py check-tags`, `zalo_oa.py <app_id> profile <user_id>` |
 | `zalo_error -32` hoặc quyền | Ứng dụng chưa được cấp quyền quản lý tin nhắn | Quản trị OA bật quyền cho ứng dụng |
 | `code: busy` | Phiên khác đang làm mới token | Chờ 1 phút, chạy lại |
 | OA trả về khác cấu hình (`wrong_oa`) | Ứng dụng trỏ nhầm OA | Sửa `accounts.json` hoặc cấp quyền lại đúng OA |

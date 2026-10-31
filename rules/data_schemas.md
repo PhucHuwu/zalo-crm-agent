@@ -27,7 +27,7 @@ Do `scripts/zalo_fetch_daily.py` tạo. Chỉ đọc, không sửa.
 - `new_messages`: tin mới từ lần chạy trước. Đây là phần cần phân tích.
 - `from`: `customer` = khách gửi, `oa` = sale/OA gửi.
 - `owner`: sale theo nhãn Zalo (`applications[].sale_tag`), hoặc `null` khi chưa phân công.
-- `assignment.by`: `zalo_tag` (có đúng một nhãn sale), `none` (chưa có nhãn), `conflict` (có từ 2 nhãn sale trở lên, kèm `tags`).
+- `assignment.by`: `zalo_tag` (có đúng một nhãn sale), `none` (chưa có nhãn), `conflict` (có từ 2 nhãn sale trở lên, kèm `tags`), `cached` hoặc `unknown` (không đọc được nhãn từ Zalo, ví dụ lỗi -212: giữ sale của lần đọc được gần nhất, hoặc `owner = null` nếu chưa từng đọc được; xem `profile_errors` trong kết quả `zalo_fetch_daily.py`).
 - `owner_changed = true`: sale phụ trách khác lần trước, tức là khách vừa được chuyển sale.
 - `index.json` cùng thư mục ngày liệt kê các hội thoại và `status`: `pending_analysis` → `analyzed`.
 

@@ -162,15 +162,27 @@ def collect_user(src, uid, since_ms):
     return new, context
 
 
+PROFILE_ERRORS = []
+PROFILE_HINT_212 = ("Không đọc được nhãn sale của khách (Zalo -212): ứng dụng chưa được cấp quyền API thông tin "
+                    "người dùng. Quản trị OA vào developers.zalo.me → ứng dụng → Official Account → Thiết lập chung, "
+                    "tick quyền quản lý thông tin người dùng/OA, rồi cấp quyền lại qua API Explorer. Khách vẫn được lấy "
+                    "tin nhắn; sale phụ trách giữ theo lần đọc được gần nhất.")
+
+
 def write_conversation(src, oa_id, uid, meta, new, context, apps, date_dir, owners, run_ms):
-    try:
-        profile = src.profile(uid) or {}
-    except ZaloError:
-        profile = {}
-    tags = tags_of(profile)
-    owner, assignment = resolve_owner(tags, apps)
     key = f"{oa_id}:{uid}"
     prev = owners.get(key)
+    try:
+        profile = src.profile(uid) or {}
+        owner, assignment = resolve_owner(tags_of(profile), apps)
+    except ZaloError as e:
+        # Tags unreadable (e.g. -212: user-info API not granted). Keep last known owner instead of
+        # silently dropping every customer into "unassigned", and report it.
+        PROFILE_ERRORS.append({"conversation_key": key, "error": str(e), **e.extra})
+        profile = {}
+        prev_app = next((x for x in apps if prev and x["app_id"] == prev.get("app_id")), None)
+        owner = {"app_id": prev_app["app_id"], "sale": prev_app.get("sale", {})} if prev_app else None
+        assignment = {"by": "cached" if owner else "unknown", "reason": "profile_unreadable"}
     owners[key] = {"app_id": owner["app_id"] if owner else None,
                    "sale": (owner or {}).get("sale", {}).get("name"),
                    "assigned_by": assignment["by"], "checked_at": run_ms,
@@ -324,6 +336,13 @@ def main():
             break
         if errors:
             entry["reader_errors"] = errors
+        if PROFILE_ERRORS:
+            codes = sorted({str(x.get("zalo_error")) for x in PROFILE_ERRORS})
+            entry["profile_errors"] = {"count": len(PROFILE_ERRORS), "zalo_errors": codes,
+                                       "sample": PROFILE_ERRORS[0]["error"]}
+            if "-212" in codes:
+                entry["profile_errors"]["hint"] = PROFILE_HINT_212
+            PROFILE_ERRORS.clear()
         if not entry["ok"]:
             summary["ok"] = False
         summary["oas"].append(entry)
